@@ -30,8 +30,9 @@ class NotificationServer implements MessageComponentInterface
 
         foreach ($this->clients as $client) {
             if ($from !== $client) {
+            	$msg = $from->resourceId . ': ' . $msg;
                 // The sender is not the receiver, send to each client connected
-                $client->send($from->resourceId . ': ' . $msg);
+                $client->send($msg);
             }
         }
     }

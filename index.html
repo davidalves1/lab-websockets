@@ -77,20 +77,15 @@
             var socket = new WebSocket('ws://localhost:3000');
 
             socket.onopen = function() {
-                // console.log('Socket status: ' + socket.readyState);
+                console.log('Connection established');
             }
 
             var enviar = document.getElementById('btnEnviar');
             enviar.addEventListener('click', sendMessage);
 
-            function sendMessage() {
-                var mensagem = document.getElementById('mensagem');
-                document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
-                socket.send(mensagem.value);
-                mensagem.value = '';
-            }
-
-            socket.onmessage = function(msg) { 
+            socket.onmessage = function(msg) {
+                console.log(msg);
+                // Ao receber uma mensagem
                 document.getElementById('conversa').value += '## ' + msg.data + "\n";
             };
 
@@ -101,6 +96,19 @@
             socket.onerror = function(err) { 
                 console.log(err.data); 
             };
+
+            function sendMessage() {
+                var mensagem = document.getElementById('mensagem');
+
+                // Exibe a mensagem no chat
+                document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
+                
+                // Envia a mensagem para o servidor
+                socket.send(mensagem.value);
+                
+                // Limpa o campo de mensagem
+                mensagem.value = '';
+            }
         </script>
     </body>
 </html>

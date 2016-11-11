@@ -3,73 +3,7 @@
     <head>
         <title>lab-websocket</title>
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-family: Tahoma, Arial, sans-serif;
-            }
-
-            button {
-                margin-top: 20px;
-                height: 35px;
-                width: 60px;
-                color: #FFFFFF;
-                background-color: #45B24A;
-                border: 0 solid;
-                border-radius: 5px;
-                font-weight: bold;
-            }
-
-            button:hover {
-                background-color: #3D9D41;
-                transition: 0.3s;
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            h1 {
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-                font-size: 48px; 
-            }
-
-            .input-text {
-                height: 30px;
-                min-width: 400px;
-                border: 1px solid #BABABA;
-                border-radius: 5px;
-                text-align: center;
-                font-size: 14px;
-            }
-
-            textarea {
-                margin-top: 10px;
-                border: 1px solid #BABABA;
-                border-radius: 5px;
-                text-align: justify;
-                min-width: 450px;
-                min-height: 300px;
-                font-family: Tahoma, Arial, sans-serif;
-                font-size: 12px;
-                padding: 10px;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div class="container">
@@ -81,44 +15,6 @@
                 <textarea id="conversa"></textarea>
             </div>
         </div>
-        <script>
-            var socket = new WebSocket('ws://localhost:3000');
-
-            socket.onopen = function() {
-                console.log('Connection established');
-            }
-
-            var enviar = document.getElementById('btnEnviar');
-            enviar.addEventListener('click', sendMessage);
-
-            socket.onmessage = function(msg) {
-                console.log(msg);
-                // Ao receber uma mensagem
-                document.getElementById('conversa').value += '## ' + msg.data + "\n";
-            };
-
-            socket.onclose = function() { 
-                console.log('Conntection is closed.'); 
-            };
-
-            socket.onerror = function(err) { 
-                console.log(err.data); 
-            };
-
-            function sendMessage() {
-                var mensagem = document.getElementById('mensagem');
-
-                if (mensagem.value !== '') {
-                    // Exibe a mensagem no chat
-                    document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
-
-                    // Envia a mensagem para o servidor
-                    socket.send(mensagem.value);
-
-                    // Limpa o campo de mensagem
-                    mensagem.value = '';
-                }
-            }
-        </script>
+        <script src="app.js"></script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>lab-ratchet</title>
+        <title>lab-websocket</title>
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <style>
             html, body {
@@ -108,14 +108,16 @@
             function sendMessage() {
                 var mensagem = document.getElementById('mensagem');
 
-                // Exibe a mensagem no chat
-                document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
-                
-                // Envia a mensagem para o servidor
-                socket.send(mensagem.value);
-                
-                // Limpa o campo de mensagem
-                mensagem.value = '';
+                if (mensagem.value !== '') {
+                    // Exibe a mensagem no chat
+                    document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
+
+                    // Envia a mensagem para o servidor
+                    socket.send(mensagem.value);
+
+                    // Limpa o campo de mensagem
+                    mensagem.value = '';
+                }
             }
         </script>
     </body>

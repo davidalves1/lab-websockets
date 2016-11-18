@@ -1,6 +1,6 @@
 'use strict';
 
-var socket = new WebSocket('ws://localhost:3000');
+var socket = new WebSocket('ws://localhost:4242');
 
 socket.onopen = function() {
     console.log('Connection established');
@@ -10,9 +10,8 @@ var enviar = document.getElementById('btnEnviar');
 enviar.addEventListener('click', sendMessage);
 
 socket.onmessage = function(msg) {
-    console.log(msg);
     // Ao receber uma mensagem
-    document.getElementById('conversa').value += '## ' + msg.data + "\n";
+    document.getElementById('conversa').value += msg.data + "\n";
 };
 
 socket.onclose = function() { 
@@ -28,7 +27,7 @@ function sendMessage() {
 
     if (mensagem.value !== '') {
         // Exibe a mensagem no chat
-        document.getElementById('conversa').value += '>> ' + mensagem.value + "\n";
+        document.getElementById('conversa').value += 'Você: ' + mensagem.value + "\n";
 
         // Envia a mensagem para o servidor
         socket.send(mensagem.value);

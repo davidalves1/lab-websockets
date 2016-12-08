@@ -1,6 +1,6 @@
 #lab-websockets
 
-Projeto para estudo de implementação de websockets utilizando o PHP com a biblioteca Ratchet.
+Projeto para estudo de implementação de websockets utilizando o PHP com a biblioteca Ratchet. Cria um chat para troca de mensagens em grupo.
 
 ## Instalação
 ```bash
